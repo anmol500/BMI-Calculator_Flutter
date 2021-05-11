@@ -1,18 +1,18 @@
-import 'package:bmi_calculator/Results.dart';
+import 'package:bmi_calculator/Calculations.dart';
+import 'package:bmi_calculator/Pages/Results_Page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'Bottom_Button.dart';
-import 'Constants.dart';
-import 'IconGender.dart';
-import 'ReuseableCard.dart';
-import 'RoundButton.dart';
+import '../Bottom_Button.dart';
+import '../Constants.dart';
+import '../IconGender.dart';
+import '../ReuseableCard.dart';
+import '../RoundButton.dart';
 
 //QuickAccess
 var height = 180;
 enum GenderSelected { male, female, no }
-bool male = false;
 GenderSelected gender = GenderSelected.no;
 
 class InputPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  int weight = 60;
+  int weight = 80;
   int age = 35;
   @override
   Widget build(BuildContext context) {
@@ -227,8 +227,18 @@ class _InputPageState extends State<InputPage> {
             flex: 1,
             child: BottomButton(
               onPress: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Results()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Calculations calc = Calculations(
+                    height: height,
+                    weight: weight,
+                  );
+
+                  return Results(
+                    resultBMI: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    resultInterpretation: calc.getInterpretation(),
+                  );
+                }));
               },
               buttonTitle: 'CALCULATE',
             ),

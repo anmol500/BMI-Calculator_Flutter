@@ -1,9 +1,20 @@
 import 'package:bmi_calculator/Bottom_Button.dart';
 import 'package:bmi_calculator/Constants.dart';
+import 'package:bmi_calculator/Pages/Input_Page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Results extends StatelessWidget {
+  Results({
+    required this.resultText,
+    required this.resultBMI,
+    required this.resultInterpretation,
+  });
+
+  final String resultText;
+  final String resultBMI;
+  final String resultInterpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +46,15 @@ class Results extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'OVERWEIGHT',
+                      resultText.toUpperCase(),
                       style: kResultBmiStyle,
                     ),
                     Text(
-                      '34',
+                      resultBMI,
                       style: kResultNumberStyle,
                     ),
                     Text(
-                      'You are heavier than the normal weight. Exersice more',
+                      resultInterpretation,
                       style: kResultCommentStyle,
                       textAlign: TextAlign.center,
                     )
@@ -55,7 +66,10 @@ class Results extends StatelessWidget {
           Expanded(
             flex: 1,
             child: BottomButton(
-              onPress: () {},
+              onPress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InputPage()));
+              },
               buttonTitle: 'RE-CALCULATE',
             ),
           )
