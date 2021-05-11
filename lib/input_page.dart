@@ -1,7 +1,9 @@
+import 'package:bmi_calculator/Results.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'Bottom_Button.dart';
 import 'Constants.dart';
 import 'IconGender.dart';
 import 'ReuseableCard.dart';
@@ -223,9 +225,12 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              width: double.infinity,
-              color: kBottomContainerColor,
+            child: BottomButton(
+              onPress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Results()));
+              },
+              buttonTitle: 'CALCULATE',
             ),
           )
         ],
